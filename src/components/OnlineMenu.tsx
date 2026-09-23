@@ -1,7 +1,8 @@
 import { useState, useMemo } from 'react';
-import { Search, Plus, Check, Clock, Sparkles, Eye, Flame } from 'lucide-react';
-import { MENU_ITEMS, MenuItem } from '../data/restaurantData';
+import { Search, Plus, Check, Clock, Sparkles, Eye, Flame, AlertCircle } from 'lucide-react';
+import { MenuItem } from '../data/restaurantData';
 import { DishIllustration } from './DishIllustration';
+import { useRestaurant } from '../context/RestaurantContext';
 
 interface OnlineMenuProps {
   onAddToCart: (item: MenuItem) => void;
@@ -12,6 +13,7 @@ interface OnlineMenuProps {
 type CategoryFilter = 'all' | 'signatures' | 'bites' | 'pork' | 'staples' | 'drinks';
 
 export function OnlineMenu({ onAddToCart, cartItemIds, onSelectDish }: OnlineMenuProps) {
+  const { menuItems } = useRestaurant();
   const [selectedCategory, setSelectedCategory] = useState<CategoryFilter>('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [onlyBudgetFriendly, setOnlyBudgetFriendly] = useState(false);
@@ -27,16 +29,15 @@ export function OnlineMenu({ onAddToCart, cartItemIds, onSelectDish }: OnlineMen
   ];
 
   const filteredItems = useMemo(() => {
-    return MENU_ITEMS.filter((item) => {
+    return menuItems.filter((item) => {
       const matchesCategory = selectedCategory === 'all' || item.category === selectedCategory;
       const matchesSearch =
         item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        item.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        (item.popularHighlight && item.popularHighlight.toLowerCase().includes(searchQuery.toLowerCase()));
+        item.description.toLowerCase().includes(searchQuery.toLowerCase());
       const matchesBudget = !onlyBudgetFriendly || item.price <= 200;
       return matchesCategory && matchesSearch && matchesBudget;
     });
-  }, [selectedCategory, searchQuery, onlyBudgetFriendly]);
+  }, [menuItems, selectedCategory, searchQuery, onlyBudgetFriendly]);
 
   const handleAddWithFeedback = (item: MenuItem) => {
     onAddToCart(item);
@@ -223,29 +224,36 @@ export function OnlineMenu({ onAddToCart, cartItemIds, onSelectDish }: OnlineMen
                       Recipe Details
                     </button>
 
-                    <button
-                      type="button"
-                      onClick={() => handleAddWithFeedback(item)}
-                      className={`py-2 px-3.5 text-xs font-semibold rounded-lg transition-colors cursor-pointer flex items-center gap-1.5 shadow-xs ${
-                        justAdded
-                          ? 'bg-emerald-700 text-white'
-                          : inCartQty > 0
-                          ? 'bg-amber-900 text-white'
-                          : 'bg-stone-900 text-stone-100 hover:bg-stone-800'
-                      }`}
-                    >
-                      {justAdded ? (
-                        <>
-                          <Check className="w-3.5 h-3.5" />
-                          <span>Added!</span>
-                        </>
-                      ) : (
-                        <>
-                          <Plus className="w-3.5 h-3.5" />
-                          <span>{inCartQty > 0 ? `Add Another (${inCartQty})` : 'Add to Order'}</span>
-                        </>
-                      )}
-                    </button>
+                    {!item.inStock ? (
+                      <span className="py-2 px-3 text-xs font-semibold rounded-lg bg-stone-200 text-stone-500 cursor-not-allowed flex items-center gap-1">
+                        <AlertCircle className="w-3.5 h-3.5" />
+                        <span>Sold Out / 86'd</span>
+                      </span>
+                    ) : (
+                      <button
+                        type="button"
+                        onClick={() => handleAddWithFeedback(item)}
+                        className={`py-2 px-3.5 text-xs font-semibold rounded-lg transition-colors cursor-pointer flex items-center gap-1.5 shadow-xs ${
+                          justAdded
+                            ? 'bg-emerald-700 text-white'
+                            : inCartQty > 0
+                            ? 'bg-amber-900 text-white'
+                            : 'bg-stone-900 text-stone-100 hover:bg-stone-800'
+                        }`}
+                      >
+                        {justAdded ? (
+                          <>
+                            <Check className="w-3.5 h-3.5" />
+                            <span>Added!</span>
+                          </>
+                        ) : (
+                          <>
+                            <Plus className="w-3.5 h-3.5" />
+                            <span>{inCartQty > 0 ? `Add Another (${inCartQty})` : 'Add to Order'}</span>
+                          </>
+                        )}
+                      </button>
+                    )}
                   </div>
 
                 </article>

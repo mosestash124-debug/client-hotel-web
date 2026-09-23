@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Calendar as CalendarIcon, Clock, Users, MapPin, CheckCircle2, Phone, User, MessageSquare, Armchair } from 'lucide-react';
 import { RESTAURANT_INFO } from '../data/restaurantData';
+import { useRestaurant } from '../context/RestaurantContext';
 
 interface ReservationData {
   name: string;
@@ -23,6 +24,7 @@ interface TableOption {
 }
 
 export function ReservationSection() {
+  const { addReservation } = useRestaurant();
   const todayStr = new Date().toISOString().split('T')[0];
 
   const tableLayout: TableOption[] = [
@@ -80,7 +82,19 @@ export function ReservationSection() {
 
     setIsSubmitting(true);
     setTimeout(() => {
-      const generatedId = `DK-${Math.floor(1000 + Math.random() * 9000)}`;
+      // Add booking to shared Admin Reservations store
+      const generatedId = addReservation({
+        customerName: reservation.name.trim(),
+        customerPhone: reservation.phone.trim(),
+        date: reservation.date,
+        time: reservation.time,
+        guests: reservation.guests,
+        tableNumber: reservation.tableNumber,
+        area: reservation.area,
+        occasion: reservation.occasion,
+        notes: reservation.notes
+      });
+
       setConfirmedBooking({
         id: generatedId,
         data: { ...reservation }

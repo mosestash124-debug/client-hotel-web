@@ -4,9 +4,10 @@ import { RESTAURANT_INFO } from '../data/restaurantData';
 interface FooterProps {
   onOpenPrompt: () => void;
   onOpenReservation: () => void;
+  onOpenAdmin?: () => void;
 }
 
-export function Footer({ onOpenPrompt, onOpenReservation }: FooterProps) {
+export function Footer({ onOpenPrompt, onOpenReservation, onOpenAdmin }: FooterProps) {
   return (
     <footer className="bg-stone-900 text-stone-300 py-14 border-t border-stone-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -60,6 +61,17 @@ export function Footer({ onOpenPrompt, onOpenReservation }: FooterProps) {
                   Open Kitchen & Hours
                 </a>
               </li>
+              {onOpenAdmin && (
+                <li>
+                  <button
+                    type="button"
+                    onClick={onOpenAdmin}
+                    className="text-amber-400 hover:text-amber-300 font-semibold transition-colors flex items-center gap-1 cursor-pointer"
+                  >
+                    <span>🛡️ Staff & Admin Managing Portal</span>
+                  </button>
+                </li>
+              )}
               <li>
                 <button
                   type="button"

@@ -1,4 +1,4 @@
-import { ShoppingBag, Calendar, Sparkles, Flame, Tag } from 'lucide-react';
+import { ShoppingBag, Calendar, Sparkles, Flame, Tag, Shield } from 'lucide-react';
 
 interface NavbarProps {
   cartCount: number;
@@ -7,6 +7,7 @@ interface NavbarProps {
   onOpenPrompt: () => void;
   onOpenLiveKitchen: () => void;
   onOpenOfferPanel?: () => void;
+  onOpenAdmin: () => void;
 }
 
 export function Navbar({
@@ -15,7 +16,8 @@ export function Navbar({
   onOpenReservation,
   onOpenPrompt,
   onOpenLiveKitchen,
-  onOpenOfferPanel
+  onOpenOfferPanel,
+  onOpenAdmin
 }: NavbarProps) {
   return (
     <header className="sticky top-0 z-40 bg-[#FAF8F5]/95 backdrop-blur-md border-b border-stone-200/80 transition-all">
@@ -70,6 +72,18 @@ export function Navbar({
           <a href="#reviews" className="hover:text-amber-800 transition-colors">
             Customer Reviews
           </a>
+
+          {/* Admin Managing Dashboard trigger in main nav */}
+          <button
+            type="button"
+            onClick={onOpenAdmin}
+            className="flex items-center gap-1 text-stone-700 hover:text-amber-900 transition-colors cursor-pointer font-medium"
+            title="Open Deekei Staff & Kitchen Managing Dashboard"
+          >
+            <Shield className="w-3.5 h-3.5 text-amber-700" />
+            <span>Admin Portal</span>
+          </button>
+
           <button 
             type="button"
             onClick={onOpenPrompt}
@@ -81,11 +95,22 @@ export function Navbar({
         </nav>
 
         {/* Zone 3: Primary Actions */}
-        <div className="flex items-center gap-2.5">
+        <div className="flex items-center gap-2 sm:gap-2.5">
+          {/* Unmissable High-Contrast Admin Portal Button (visible on ALL screens) */}
+          <button
+            type="button"
+            onClick={onOpenAdmin}
+            className="flex items-center gap-1.5 px-3 py-2 text-xs font-bold text-amber-950 bg-amber-100/90 hover:bg-amber-200 border border-amber-300 rounded-xl transition-all cursor-pointer shadow-xs"
+            title="Open Deekei Staff & Kitchen Managing Dashboard"
+          >
+            <Shield className="w-4 h-4 text-amber-800" />
+            <span className="whitespace-nowrap">Admin Portal</span>
+          </button>
+
           <button
             type="button"
             onClick={onOpenCart}
-            className="relative flex items-center gap-2 px-3.5 py-2 text-xs font-semibold text-stone-800 bg-stone-100 hover:bg-stone-200 border border-stone-200 rounded-xl transition-colors cursor-pointer"
+            className="relative flex items-center gap-2 px-3 py-2 text-xs font-semibold text-stone-800 bg-stone-100 hover:bg-stone-200 border border-stone-200 rounded-xl transition-colors cursor-pointer"
             aria-label="View Takeaway Bag"
           >
             <ShoppingBag className="w-4 h-4 text-amber-800" />
@@ -100,7 +125,7 @@ export function Navbar({
           <button
             type="button"
             onClick={onOpenReservation}
-            className="flex items-center gap-1.5 px-4 py-2 text-xs font-semibold text-white bg-amber-800 hover:bg-amber-900 rounded-xl transition-colors cursor-pointer shadow-sm"
+            className="hidden sm:flex items-center gap-1.5 px-3.5 py-2 text-xs font-semibold text-white bg-amber-800 hover:bg-amber-900 rounded-xl transition-colors cursor-pointer shadow-sm"
           >
             <Calendar className="w-3.5 h-3.5" />
             <span className="whitespace-nowrap">Reserve Table</span>

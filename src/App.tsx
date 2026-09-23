@@ -4,6 +4,7 @@
  */
 
 import { useState } from 'react';
+import { Shield } from 'lucide-react';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { OnlineMenu } from './components/OnlineMenu';
@@ -18,13 +19,23 @@ import { TakeawayCartDrawer, CartItem } from './components/TakeawayCartDrawer';
 import { DishDetailModal } from './components/DishDetailModal';
 import { OpenKitchenLiveModal } from './components/OpenKitchenLiveModal';
 import { OfferDayPanel } from './components/OfferDayPanel';
+import { AdminLoginModal } from './components/admin/AdminLoginModal';
+import { AdminDashboard } from './components/admin/AdminDashboard';
+import { RestaurantProvider, useRestaurant } from './context/RestaurantContext';
 import { MenuItem } from './data/restaurantData';
 
-export default function App() {
+function RestaurantAppContent() {
+  const { 
+    isAdminOpen, 
+    setIsAdminOpen, 
+    isAuthenticated 
+  } = useRestaurant();
+
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isPromptModalOpen, setIsPromptModalOpen] = useState(false);
   const [isLiveKitchenOpen, setIsLiveKitchenOpen] = useState(false);
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [selectedDish, setSelectedDish] = useState<MenuItem | null>(null);
   const [offerPanelKey, setOfferPanelKey] = useState(0);
 
@@ -82,6 +93,14 @@ export default function App() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  const handleOpenAdminPortal = () => {
+    if (isAuthenticated) {
+      setIsAdminOpen(true);
+    } else {
+      setIsLoginModalOpen(true);
+    }
+  };
+
   return (
     <div className="min-h-screen flex flex-col bg-[#FAF8F5] text-stone-900 selection:bg-amber-100 selection:text-amber-900">
       
@@ -92,7 +111,7 @@ export default function App() {
         onOpenReservation={() => scrollToSection('reservation')}
       />
 
-      {/* 3-Zone Strict Top Bar */}
+      {/* 3-Zone Strict Top Bar with Admin Portal Trigger */}
       <Navbar
         cartCount={totalCartCount}
         onOpenCart={() => setIsCartOpen(true)}
@@ -100,6 +119,7 @@ export default function App() {
         onOpenPrompt={() => setIsPromptModalOpen(true)}
         onOpenLiveKitchen={() => setIsLiveKitchenOpen(true)}
         onOpenOfferPanel={handleOpenOfferPanel}
+        onOpenAdmin={handleOpenAdminPortal}
       />
 
       {/* Main Content Sections */}
@@ -151,7 +171,25 @@ export default function App() {
       <Footer
         onOpenPrompt={() => setIsPromptModalOpen(true)}
         onOpenReservation={() => scrollToSection('reservation')}
+        onOpenAdmin={handleOpenAdminPortal}
       />
+
+      {/* Floating Persistent Admin Access Launcher (Always visible at bottom-left corner) */}
+      <aside aria-label="Staff Administration" className="fixed bottom-5 left-5 z-40">
+        <button
+          type="button"
+          onClick={handleOpenAdminPortal}
+          className="flex items-center gap-2.5 px-4 py-2.5 bg-stone-900/95 hover:bg-stone-850 text-stone-100 font-semibold text-xs rounded-full shadow-2xl border-2 border-amber-500/60 transition-all hover:scale-105 active:scale-95 cursor-pointer backdrop-blur-md ring-4 ring-amber-500/15 group"
+          title="Open Deekei Staff & Kitchen Managing Dashboard"
+        >
+          <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+          <Shield className="w-4 h-4 text-amber-400 group-hover:rotate-12 transition-transform" />
+          <span>Admin Dashboard</span>
+          <span className="text-[10px] font-mono bg-amber-500/20 text-amber-300 px-1.5 py-0.5 rounded-sm border border-amber-500/30">
+            Staff KDS
+          </span>
+        </button>
+      </aside>
 
       {/* Dish Detail & Recipe Modal */}
       <DishDetailModal
@@ -185,6 +223,23 @@ export default function App() {
         onClose={() => setIsPromptModalOpen(false)}
       />
 
+      {/* Admin Login PIN Modal */}
+      <AdminLoginModal
+        isOpen={isLoginModalOpen}
+        onClose={() => setIsLoginModalOpen(false)}
+      />
+
+      {/* Full Admin Managing Dashboard Portal */}
+      <AdminDashboard />
+
     </div>
+  );
+}
+
+export default function App() {
+  return (
+    <RestaurantProvider>
+      <RestaurantAppContent />
+    </RestaurantProvider>
   );
 }

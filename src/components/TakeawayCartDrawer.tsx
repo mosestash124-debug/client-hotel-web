@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { X, Trash2, Plus, Minus, ShoppingBag, CheckCircle, ArrowRight } from 'lucide-react';
 import { MenuItem, RESTAURANT_INFO } from '../data/restaurantData';
+import { useRestaurant } from '../context/RestaurantContext';
 
 export interface CartItem {
   item: MenuItem;
@@ -24,6 +25,7 @@ export function TakeawayCartDrawer({
   onRemoveItem,
   onClearCart
 }: TakeawayCartDrawerProps) {
+  const { addOrder } = useRestaurant();
   const [customerName, setCustomerName] = useState('');
   const [customerPhone, setCustomerPhone] = useState('');
   const [pickupTime, setPickupTime] = useState('15-20 mins (Fastest)');
@@ -40,13 +42,40 @@ export function TakeawayCartDrawer({
 
   const totalAmount = items.reduce((sum, ci) => sum + ci.item.price * ci.quantity, 0);
 
+  const getItemStation = (name: string, category: string): 'tava' | 'stew' | 'pork' | 'fryer' | 'bar' => {
+    const lower = name.toLowerCase();
+    if (lower.includes('chapati') || lower.includes('chapo')) return 'tava';
+    if (lower.includes('stew') || lower.includes('ugali') || lower.includes('pilau') || lower.includes('matoke')) return 'stew';
+    if (lower.includes('pork')) return 'pork';
+    if (lower.includes('samosa')) return 'fryer';
+    if (lower.includes('chai') || lower.includes('juice') || lower.includes('kahawa') || category === 'drinks') return 'bar';
+    return 'stew';
+  };
+
   const handlePlaceOrder = (e: React.FormEvent) => {
     e.preventDefault();
     if (!customerName.trim() || !customerPhone.trim()) return;
 
     setIsSubmitting(true);
     setTimeout(() => {
-      const generatedOrderId = `DK-ORD-${Math.floor(1000 + Math.random() * 9000)}`;
+      // Add order to shared Admin KDS store
+      const generatedOrderId = addOrder({
+        customerName: customerName.trim(),
+        customerPhone: customerPhone.trim(),
+        type: 'takeaway',
+        items: items.map((ci) => ({
+          name: ci.item.name,
+          quantity: ci.quantity,
+          price: ci.item.price,
+          station: getItemStation(ci.item.name, ci.item.category)
+        })),
+        totalAmount,
+        paymentMethod,
+        paymentStatus: paymentMethod === 'mpesa' ? 'paid' : 'pay_on_pickup',
+        estimatedMins: 15,
+        notes: notes.trim() ? `${pickupTime}. Note: ${notes.trim()}` : pickupTime
+      });
+
       setConfirmedOrder({
         orderId: generatedOrderId,
         total: totalAmount,

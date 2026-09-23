@@ -1,3 +1,13 @@
+import heroSpreadImg from '../assets/images/hero_spread_1790174713383.jpg';
+import openKitchenChefImg from '../assets/images/open_kitchen_1790174761082.jpg';
+import chapatiBeefImg from '../assets/images/chapati_beef_1790174726420.jpg';
+import porkPlantainsImg from '../assets/images/pork_plantains_1790174738491.jpg';
+import crispySamosasImg from '../assets/images/crisp_samosas_1790174749568.jpg';
+import ugaliSukumaImg from '../assets/images/ugali_sukuma_1790174775314.jpg';
+import chickenPilauImg from '../assets/images/chicken_pilau_1790174788775.jpg';
+import masalaChaiImg from '../assets/images/masala_chai_1790174804283.jpg';
+import passionJuiceImg from '../assets/images/passion_juice_1790174816216.jpg';
+
 export interface MenuItem {
   id: string;
   name: string;
@@ -44,15 +54,15 @@ export interface KitchenStation {
 }
 
 export const RESTAURANT_MEDIA = {
-  heroSpread: "/src/assets/images/hero_spread_1790174713383.jpg",
-  openKitchenChef: "/src/assets/images/open_kitchen_1790174761082.jpg",
-  chapatiBeef: "/src/assets/images/chapati_beef_1790174726420.jpg",
-  porkPlantains: "/src/assets/images/pork_plantains_1790174738491.jpg",
-  crispySamosas: "/src/assets/images/crisp_samosas_1790174749568.jpg",
-  ugaliSukuma: "/src/assets/images/ugali_sukuma_1790174775314.jpg",
-  chickenPilau: "/src/assets/images/chicken_pilau_1790174788775.jpg",
-  masalaChai: "/src/assets/images/masala_chai_1790174804283.jpg",
-  passionJuice: "/src/assets/images/passion_juice_1790174816216.jpg"
+  heroSpread: heroSpreadImg,
+  openKitchenChef: openKitchenChefImg,
+  chapatiBeef: chapatiBeefImg,
+  porkPlantains: porkPlantainsImg,
+  crispySamosas: crispySamosasImg,
+  ugaliSukuma: ugaliSukumaImg,
+  chickenPilau: chickenPilauImg,
+  masalaChai: masalaChaiImg,
+  passionJuice: passionJuiceImg
 };
 
 export const RESTAURANT_INFO = {
@@ -85,7 +95,7 @@ export const KITCHEN_STATIONS: KitchenStation[] = [
     name: "The Artisan Tava Griddle",
     tagline: "Layered, Flaky Chapatis Made Fresh on Order",
     icon: "🫓",
-    imageSrc: "/src/assets/images/open_kitchen_1790174761082.jpg",
+    imageSrc: openKitchenChefImg,
     chefAction: "Rolling chilled wheat dough, brushing with pure ghee, and blistering golden layers on the seasoned cast-iron tava.",
     secret: "Each chapati is rolled with multiple delicate spiral folds to guarantee separation of layers when torn.",
     soundCue: "Sizzle of dough touching the seasoned iron tava",
@@ -96,7 +106,7 @@ export const KITCHEN_STATIONS: KitchenStation[] = [
     name: "The Slow-Simmered Stew Pots",
     tagline: "Rich Tomato-Onion Gravy & Local Tender Beef",
     icon: "🍲",
-    imageSrc: "/src/assets/images/chapati_beef_1790174726420.jpg",
+    imageSrc: chapatiBeefImg,
     chefAction: "Gentle 3-hour simmer of tender beef cuts with ripe highland plum tomatoes, caramelized sweet onions, garlic, and fresh dhania.",
     secret: "No artificial bouillon cubes—deep flavor comes from long bone broth reductions and Mt. Kenya highland aromatics.",
     soundCue: "Rhythmic bubbling of hearty beef gravy",
@@ -107,7 +117,7 @@ export const KITCHEN_STATIONS: KitchenStation[] = [
     name: "The Sizzling Pork & Plantain Station",
     tagline: "Visitor's Crown Jewel for 3+ Years",
     icon: "🥩",
-    imageSrc: "/src/assets/images/pork_plantains_1790174738491.jpg",
+    imageSrc: porkPlantainsImg,
     chefAction: "Searing prime pork cuts with fresh ginger, cracked black pepper, and pairing with sweet golden fried matoke plantains.",
     secret: "Ripened Murang'a plantains are quickly flash-caramelized to create a sweet contrast against savory seasoned pork.",
     soundCue: "Crisp crackle of ginger-glazed pork in high heat",
@@ -118,7 +128,7 @@ export const KITCHEN_STATIONS: KitchenStation[] = [
     name: "The Golden Samosa Fryer",
     tagline: "Murang'a's Crunchiest Pastry (12+ Reviews)",
     icon: "🥟",
-    imageSrc: "/src/assets/images/crisp_samosas_1790174749568.jpg",
+    imageSrc: crispySamosasImg,
     chefAction: "Folding paper-thin pastry envelopes filled with seasoned minced beef, scallions, toasted cumin seeds, and frying to a blistered crunch.",
     secret: "The pastry is rolled ultra-thin by hand every morning at 5:30 AM before the town wakes up.",
     soundCue: "Crunch when sliced or bitten fresh",
@@ -129,7 +139,7 @@ export const KITCHEN_STATIONS: KitchenStation[] = [
     name: "The Highland Chai & Kahawa Bar",
     tagline: "Fresh Highland Milk & Pounded Ginger Root",
     icon: "☕",
-    imageSrc: "/src/assets/images/masala_chai_1790174804283.jpg",
+    imageSrc: masalaChaiImg,
     chefAction: "Steeping loose-leaf Central Kenya black tea in fresh dairy milk with hand-crushed ginger, cinnamon bark, and green cardamom.",
     secret: "Crushed fresh raw ginger is boiled together with the milk to extract soothing natural oils.",
     soundCue: "Whistling kettle and aroma of fresh ginger",
@@ -148,7 +158,7 @@ export const MENU_ITEMS: MenuItem[] = [
     prepTime: "12-15 mins",
     dietary: "Halal / Local Beef",
     imageAlt: "Golden layered Kenyan chapatis served with tender beef stew in rich tomato gravy",
-    imageSrc: "/src/assets/images/chapati_beef_1790174726420.jpg",
+    imageSrc: chapatiBeefImg,
     badge: "Menu Highlight",
     ingredients: ["Local grass-fed beef", "Hand-rolled wheat dough", "Ripe plum tomatoes", "Coriander (Dhania)", "Pure ghee", "Kachumbari"],
     spiceLevel: "Mild",
@@ -166,7 +176,7 @@ export const MENU_ITEMS: MenuItem[] = [
     prepTime: "5 mins",
     dietary: "Handmade Pastry",
     imageAlt: "Crispy golden triangular beef samosas with fresh lime and chili garnish",
-    imageSrc: "/src/assets/images/crisp_samosas_1790174749568.jpg",
+    imageSrc: crispySamosasImg,
     badge: "Most Loved",
     ingredients: ["Spiced minced beef", "Spring onions", "Toasted cumin seeds", "Coriander", "Crisp handmade pastry", "Fresh lime"],
     spiceLevel: "Medium",
@@ -184,7 +194,7 @@ export const MENU_ITEMS: MenuItem[] = [
     prepTime: "15-20 mins",
     dietary: "Pork Specialty",
     imageAlt: "Succulent spiced fried pork chunks with golden caramelized sweet plantains and greens",
-    imageSrc: "/src/assets/images/pork_plantains_1790174738491.jpg",
+    imageSrc: porkPlantainsImg,
     badge: "Chef Specialty",
     ingredients: ["Tender prime pork cuts", "Sweet ripe Murang'a plantains", "Fresh ginger root", "Garlic cloves", "Black peppercorns", "Sukuma wiki"],
     spiceLevel: "Medium",
@@ -202,7 +212,7 @@ export const MENU_ITEMS: MenuItem[] = [
     prepTime: "10 mins",
     dietary: "Wholesome Classic",
     imageAlt: "Steaming hot white ugali with tender beef stew and fresh sauteed greens",
-    imageSrc: "/src/assets/images/ugali_sukuma_1790174775314.jpg",
+    imageSrc: ugaliSukumaImg,
     badge: "Kenyan Soul Food",
     ingredients: ["Stone-ground white maize meal", "Tender beef cubes", "Highland collard greens", "Caramelized onions", "Beef bone broth"],
     spiceLevel: "Mild",
@@ -220,7 +230,7 @@ export const MENU_ITEMS: MenuItem[] = [
     prepTime: "15-18 mins",
     dietary: "Pork Specialty",
     imageAlt: "Sizzling wet-fry pork with onions, tomatoes and steaming hot ugali",
-    imageSrc: "/src/assets/images/pork_plantains_1790174738491.jpg",
+    imageSrc: porkPlantainsImg,
     ingredients: ["Pork belly & loin cuts", "Tomatoes", "Red onions", "Bird's eye chili", "Stone-milled ugali", "Fresh kachumbari"],
     spiceLevel: "Zesty",
     pairing: "Ice-cold soda or fresh tropical juice.",
@@ -237,7 +247,7 @@ export const MENU_ITEMS: MenuItem[] = [
     prepTime: "12 mins",
     dietary: "Aromatic Fragrance",
     imageAlt: "Aromatic spiced chicken pilau rice with fresh kachumbari tomato onion salad",
-    imageSrc: "/src/assets/images/chicken_pilau_1790174788775.jpg",
+    imageSrc: chickenPilauImg,
     ingredients: ["Long-grain basmati rice", "Tender farm chicken", "Cardamom pods", "Cloves", "Cinnamon", "Cumin", "Kachumbari"],
     spiceLevel: "Mild",
     pairing: "Spicy kachumbari and a slice of ripe banana.",
@@ -254,7 +264,7 @@ export const MENU_ITEMS: MenuItem[] = [
     prepTime: "5 mins",
     dietary: "100% Vegetarian",
     imageAlt: "Golden fried vegetable samosas served with tangy tamarind dip",
-    imageSrc: "/src/assets/images/crisp_samosas_1790174749568.jpg",
+    imageSrc: crispySamosasImg,
     ingredients: ["Highland potatoes", "Garden green peas", "Carrots", "Garam masala", "Coriander", "Pastry crust"],
     spiceLevel: "Medium",
     pairing: "Masala Chai or Black Spiced Coffee.",
@@ -271,7 +281,7 @@ export const MENU_ITEMS: MenuItem[] = [
     prepTime: "12 mins",
     dietary: "Hearty Stew",
     imageAlt: "Traditional Kenyan matoke plantain stew with tender beef and vegetables",
-    imageSrc: "/src/assets/images/chapati_beef_1790174726420.jpg",
+    imageSrc: chapatiBeefImg,
     ingredients: ["Green cooking bananas (Matoke)", "Tender beef chunks", "Carrots", "Tomato concasse", "Mild highland curry spices"],
     spiceLevel: "Mild",
     pairing: "Flaky chapati or extra steamed spinach.",
@@ -288,7 +298,7 @@ export const MENU_ITEMS: MenuItem[] = [
     prepTime: "Ready to Serve",
     dietary: "Vegetarian",
     imageAlt: "Freshly rolled golden layered Kenyan chapati on an open griddle",
-    imageSrc: "/src/assets/images/chapati_beef_1790174726420.jpg",
+    imageSrc: chapatiBeefImg,
     ingredients: ["Unbleached wheat flour", "Pure vegetable oil", "Warm water", "Pinch of salt & sugar", "Light ghee brush"],
     spiceLevel: "Mild",
     pairing: "Delicious with any stew or simply enjoyed dipped in hot tea.",
@@ -305,7 +315,7 @@ export const MENU_ITEMS: MenuItem[] = [
     prepTime: "5 mins",
     dietary: "Fresh Milk / Spiced",
     imageAlt: "Steaming ceramic cup of spiced Kenyan milk chai with ginger and cardamom",
-    imageSrc: "/src/assets/images/masala_chai_1790174804283.jpg",
+    imageSrc: masalaChaiImg,
     badge: "Must Try",
     ingredients: ["Murang'a dairy milk", "Highland black tea leaves", "Crushed fresh ginger root", "Cinnamon bark", "Green cardamom"],
     spiceLevel: "Mild",
@@ -323,7 +333,7 @@ export const MENU_ITEMS: MenuItem[] = [
     prepTime: "3 mins",
     dietary: "Cold Pressed / Vegan",
     imageAlt: "Chilled glass carafe of fresh passion fruit juice with natural seeds and mint",
-    imageSrc: "/src/assets/images/passion_juice_1790174816216.jpg",
+    imageSrc: passionJuiceImg,
     ingredients: ["Local Murang'a passion fruits", "Purified spring water", "Light natural cane sugar", "Fresh mint sprig"],
     spiceLevel: "Mild",
     pairing: "Cuts through rich roast pork and spicy samosas.",
@@ -340,7 +350,7 @@ export const MENU_ITEMS: MenuItem[] = [
     prepTime: "4 mins",
     dietary: "Sugar-free / Vegan",
     imageAlt: "Traditional glass cup of spiced Kenyan black coffee",
-    imageSrc: "/src/assets/images/masala_chai_1790174804283.jpg",
+    imageSrc: masalaChaiImg,
     ingredients: ["Central Kenya Arabica coffee", "Ground dried ginger", "Cloves", "Cinnamon"],
     spiceLevel: "Medium",
     pairing: "Crispy beef samosas.",
