@@ -1,0 +1,7 @@
+{
+  "name": "Deekei Restaurant",
+  "description": "Authentic Kenyan restaurant in Murang'a Town featuring fresh open-kitchen dining, online menu, table reservations, and verified reviews.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
+
